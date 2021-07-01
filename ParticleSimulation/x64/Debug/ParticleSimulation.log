@@ -1,0 +1,12 @@
+﻿  main.cpp
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(57,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(94,69): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(107,28): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(109,75): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(114,89): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(117,83): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(122,90): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(125,83): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(151,65): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(152,55): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  ParticleSimulation.vcxproj -> C:\Users\Julian\source\repos\ParticleSimulation\x64\Debug\ParticleSimulation.exe
