@@ -23,7 +23,7 @@ int main()
 {
     const int width = 800, height = 600;
     sf::RenderWindow window(sf::VideoMode(width, height), "Particle simulation");
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(300);
     std::map<int, bool> keys;
 
     enum Type{Empty, Sand};
@@ -51,10 +51,10 @@ int main()
 
     sf::Uint8* pixels = new sf::Uint8[width * height * 4];
     sf::Texture t;
-    t.create(width, height);
+    t.create(window.getSize().x, window.getSize().y);
     sf::Sprite spr(t);
 
-    for (int i = 0; i < window.getSize().x * window.getSize().y * 4; i += 4) {
+    for (int i = 0; i < width * height * 4; i += 4) {
         pixels[i] = 0;      //r
         pixels[i + 1] = 0;  //g
         pixels[i + 2] = 0;  //b
@@ -87,11 +87,11 @@ int main()
         * update
         */
         if (keys[sf::Keyboard::Escape]) window.close();
-        for (size_t y = 0; y < height; y++)
+        for (size_t x = 0; x < width; x++)
         {
-            for (size_t x = 0; x < width; x++)
+            for (size_t y = 0; y < height; y++)
             {
-                Particle* curr = getParticle(x, y, particles, height);
+                Particle* curr = getParticle(x, y, particles, width);
                 if (curr->id == Empty)
                 {
                     curr->hasUpdated = true;
@@ -101,28 +101,28 @@ int main()
                 {
                     curr->hasUpdated = true;
                     curr->lifeTime++;
-                    if (y != 0)
+                    if (/*y < height*/ true)
                     {
                         int r = randd();
-                        if (getParticle(x, y - 1, particles, height)->id == Empty)
+                        if (getParticle(x, y + 1, particles, width)->id == Empty)
                         {
-                            setParticle(x, y - 1, particles, *curr, height);
+                            setParticle(x, y + 1, particles, *curr, width);
                             resetParticle(curr);
                         }
                         else if (r == 0)
                         {
-                            Particle* left = getParticle(x - 1, y - 1, particles, height);
+                            Particle* left = getParticle(x - 1, y + 1, particles, width);
                             if (left->id == Empty)
                             {
-                                setParticle(x - 1, y - 1, particles, *curr, height);
+                                setParticle(x - 1, y + 1, particles, *curr, width);
                                 resetParticle(curr);
                             }
                         }
                         else {
-                            Particle* right = getParticle(x + 1, y - 1, particles, height);
+                            Particle* right = getParticle(x + 1, y + 1, particles, width);
                             if (right->id == Empty)
                             {
-                                setParticle(x + 1, y - 1, particles, *curr, height);
+                                setParticle(x + 1, y + 1, particles, *curr, width);
                                 resetParticle(curr);
                             }
                         }
@@ -134,9 +134,12 @@ int main()
         sf::Vector2i mPos = sf::Mouse::getPosition(window);
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
-            Particle* p = getParticle(mPos.x, mPos.y, particles, height);
-            p->id = Sand;
-            p->color = sf::Color::Yellow;
+            if (mPos.y < 0 || mPos.y > height || mPos.x < 0 || mPos.x > width ? false : true)
+            {
+                Particle* p = getParticle(mPos.x, mPos.y, particles, width);
+                p->id = Sand;
+                p->color = sf::Color::Yellow;
+            }
         }
 
         /*
@@ -156,6 +159,7 @@ int main()
 
         t.update(pixels);
         spr.setTexture(t);
+        spr.setPosition(0.0f, 0.0f);
 
         window.clear();
         window.draw(spr);
@@ -211,5 +215,5 @@ void setParticle(int x, int y, Particle* particles, Particle particle, int col)
 }
 
 int randd() {
-    return (int)rand() / ((int)RAND_MAX + 1);
+    return ((rand() / (float)(RAND_MAX + 1)) < 0.5 ? 1 : 0);
 }
