@@ -10,7 +10,6 @@ struct Particle
     float maxLifeTime;
     float lifeTime;
     sf::Vector2i velocity;
-    sf::Vector2i pos;
     sf::Color color;
 };
 
@@ -18,10 +17,10 @@ void resetParticle(Particle* p);
 void setPixel(int x, int y, sf::Color color, sf::Uint8* pixels, int col);
 Particle* getParticle(int x, int y, Particle* particles, int col);
 void setParticle(int x, int y, Particle* particles, Particle particle, int col);
-void spawnParticles(int r, Particle* particles, int type, int x, int y, int width);
+void spawnParticles(int r, Particle* particles, int type, int x, int y, int width, int height);
 void loadFont(std::string path, sf::Font* font);
 sf::Color getColor(int type);
-float calcDist(float x, float y);
+float calcDist(float cx, float cy, float px, float py);
 int randd();
 
 int main()
@@ -31,7 +30,7 @@ int main()
     window.setFramerateLimit(600);
     std::map<int, bool> keys;
 
-    enum Type{Empty, Sand, Water};
+    enum Type { Empty, Sand, Water };
 
     float fps;
     sf::Clock clock = sf::Clock::Clock();
@@ -53,7 +52,6 @@ int main()
             p->hasUpdated = false;
             p->lifeTime = 0.f;
             p->velocity = sf::Vector2i(0, 0);
-            p->pos = sf::Vector2i(x, y);
             p->maxLifeTime = -1.f;
         }
     }
@@ -96,12 +94,12 @@ int main()
         * update
         */
         if (keys[sf::Keyboard::Escape]) window.close();
-        for (size_t x = 0; x < width; x++)
+        for (size_t x = width - 1; x > 0; x--)
         {
-            for (size_t y = 0; y < height; y++)
+            for (size_t y = height - 1; y > 0; y--)
             {
                 Particle* curr = getParticle(x, y, particles, width);
-                if (curr->hasUpdated != true)
+                 if (curr->hasUpdated != true)
                 {
                     if (curr->id == Empty)
                     {
@@ -149,7 +147,7 @@ int main()
                                 setParticle(x, y + 1, particles, *curr, width);
                                 resetParticle(curr);
                             }
-                            else if (getParticle(x - 1, y + 1, particles, width)->id == Empty)
+                            if (getParticle(x - 1, y + 1, particles, width)->id == Empty)
                             {
                                 Particle* left = getParticle(x - 1, y + 1, particles, width);
                                 if (left->id == Empty)
@@ -158,7 +156,7 @@ int main()
                                     resetParticle(curr);
                                 }
                             }
-                            else if (getParticle(x + 1, y + 1, particles, width)->id == Empty) {
+                            if (getParticle(x + 1, y + 1, particles, width)->id == Empty) {
                                 Particle* right = getParticle(x + 1, y + 1, particles, width);
                                 if (right->id == Empty)
                                 {
@@ -166,7 +164,7 @@ int main()
                                     resetParticle(curr);
                                 }
                             }
-                            else if (getParticle(x + 1, y, particles, width)->id == Empty)
+                            if (getParticle(x + 1, y, particles, width)->id == Empty)
                             {
                                 Particle* right = getParticle(x + 1, y, particles, width);
                                 if (right->id == Empty)
@@ -175,7 +173,7 @@ int main()
                                     resetParticle(curr);
                                 }
                             }
-                            else if (getParticle(x - 1, y, particles, width)->id == Empty)
+                            if (getParticle(x - 1, y, particles, width)->id == Empty)
                             {
                                 Particle* right = getParticle(x - 1, y, particles, width);
                                 if (right->id == Empty)
@@ -209,7 +207,7 @@ int main()
         {
             if (mPos.y < 0 || mPos.y > height || mPos.x < 0 || mPos.x > width ? false : true)
             {
-                spawnParticles(5, particles, place, mPos.x, mPos.y, width);
+                spawnParticles(10, particles, place, mPos.x, mPos.y, width, height);
             }
         }
 
@@ -218,9 +216,9 @@ int main()
         * first update pixels and sprite/texture
         * then draw
         */
-        for (size_t i = 0; i < width; i++)
+        for (size_t i = width - 1; i > 0; i--)
         {
-            for (size_t j = 0; j < height; j++)
+            for (size_t j = height - 1; j > 0; j--)
             {
                 Particle* p = getParticle(i, j, particles, width);
                 setPixel(i, j, p->color, pixels, width);
@@ -282,31 +280,35 @@ void setParticle(int x, int y, Particle* particles, Particle particle, int col)
     p->hasUpdated = particle.hasUpdated;
     p->lifeTime = particle.lifeTime;
     p->maxLifeTime = particle.maxLifeTime;
-    p->pos = particle.pos;
     p->velocity = particle.velocity;
 }
 
-void spawnParticles(int r, Particle* particles, int type, int x, int y, int width)
+void spawnParticles(int r, Particle* particles, int type, int x, int y, int width, int height)
 {
     std::vector<sf::Vector2i> positions = std::vector<sf::Vector2i>();
-    int s = powf(r, 2);
+    int s = r*r;
+    int c = 0;
     for (int i = 0; i < s; i++)
     {
         for (int j = 0; j < s; j++)
         {
-            int dx = calcDist(i, j);
+            float dx = calcDist(x + (i - r), y + (j - r), x, y);
             if (dx <= r)
-                positions.push_back(sf::Vector2i(i, j));
+            {
+                if(c % 2 == 0)
+                    positions.push_back(sf::Vector2i(i, j));
+
+                c++;
+            }
         }
     }
 
     for (int i = 0; i < positions.size(); i++)
     {
-        Particle* p = getParticle(positions.at(i).x, positions.at(i).x, particles, width);
+        Particle* p = getParticle(x + positions.at(i).x, y + positions.at(i).y, particles, width);
         p->id = type;
         p->color = getColor(type);
         p->hasUpdated = true;
-        p->pos = positions.at(i);
     }
 }
 
@@ -328,9 +330,12 @@ sf::Color getColor(int type)
     }
 }
 
-float calcDist(float x, float y)
+float calcDist(float x1, float y1, float x2, float y2)
 {
-    return sqrtf(powf(x - x, 2) + powf(y - y, 2));
+    float dx = x1 - x2;
+    float dy = y1 - y2;
+    float mult = dx * dx + dy * dy;
+    return sqrtf(mult);
 }
 
 int randd() {
