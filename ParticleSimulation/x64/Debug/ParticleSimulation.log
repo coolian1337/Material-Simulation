@@ -1,32 +1,7 @@
-﻿  main.cpp
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(101,68): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(115,32): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(117,78): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(120,37): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(122,92): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(125,86): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(129,37): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(130,93): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(133,86): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(145,32): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(147,78): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(150,32): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(152,92): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(155,86): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(159,32): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(160,93): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(163,86): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(167,32): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(169,89): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(172,82): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(176,32): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(178,89): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(181,82): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(223,65): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(224,55): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(295,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(295,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(295,48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(295,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\main.cpp(331): warning C4715: 'getColor': not all control paths return a value
+﻿  Particle.cpp
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(58,68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(58,65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(58,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(58,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(122): warning C4715: 'Particle::getColor': not all control paths return a value
   ParticleSimulation.vcxproj -> C:\Users\Julian\source\repos\ParticleSimulation\x64\Debug\ParticleSimulation.exe

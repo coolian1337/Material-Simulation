@@ -145,10 +145,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\math.cpp" />
+    <ClCompile Include="src\Particle.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Roboto-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\math.h" />
+    <ClInclude Include="src\Particle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
