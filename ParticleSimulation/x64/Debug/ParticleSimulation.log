@@ -1,7 +1,2 @@
-﻿  Particle.cpp
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(58,68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(58,65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(58,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(58,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(122): warning C4715: 'Particle::getColor': not all control paths return a value
+﻿  main.cpp
   ParticleSimulation.vcxproj -> C:\Users\Julian\source\repos\ParticleSimulation\x64\Debug\ParticleSimulation.exe

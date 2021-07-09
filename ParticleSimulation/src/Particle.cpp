@@ -135,26 +135,27 @@ void Particle::moveParticle(Particle_s* curr,int x, int y)
 
 void Particle::updateSand(int x, int y)
 {
-    if (y + 1 < height)
-    {
-        Particle_s* curr = getParticle(x, y);
-        Particle_s* below = getParticle(x, y + 1);
-        Particle_s* belowRight = getParticle(x - 1, y + 1);
-        Particle_s* belowLeft = getParticle(x + 1, y + 1);
+    Particle_s* curr = getParticle(x, y);
+    curr->velocity.y = gravity;
+    int cX = x;
+    int cY = y;
+    
+        for (int i = 0; i < curr->velocity.y; i++)
+        {
+            if (cY + 1 < height)
+            {
+                Particle_s* p = getParticle(cX, cY += 1);
+            
+                if (p->id == Empty)
+                {
+                    moveParticle(curr, cX, cY);
+                    curr->velocity.y -= 1;
 
-        if (below->id == Empty)
-        {
-            moveParticle(curr, x, y + 1);
+                }
+                curr = &*p;
+            }
         }
-        else if (belowRight->id == Empty)
-        {
-            moveParticle(curr, x - 1, y + 1);
-        }
-        else if (belowLeft->id == Empty)
-        {
-            moveParticle(curr, x + 1, y + 1);
-        }
-    }
+    
 }
 
 void Particle::updateWater(int x, int y)

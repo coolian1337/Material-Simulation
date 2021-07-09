@@ -10,7 +10,7 @@ int main()
 {
     const int width = 800, height = 600;
     sf::RenderWindow window(sf::VideoMode(width, height), "Particle simulation");
-    window.setFramerateLimit(600);
+    window.setFramerateLimit(60);
     std::map<int, bool> keys;
 
     float fps;
@@ -68,7 +68,7 @@ int main()
         {
             if (mPos.y < 0 || mPos.y > height || mPos.x < 0 || mPos.x > width ? false : true)
             {
-                particleSystem.spawnParticles(10, place, mPos.x, mPos.y);
+                particleSystem.spawnParticles(20, place, mPos.x, mPos.y);
             }
         }
 
