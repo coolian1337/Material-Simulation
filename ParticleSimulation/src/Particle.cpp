@@ -1,4 +1,5 @@
 #include "Particle.h"
+#include "math.h"
 
 Particle::Particle(int width, int height, float gravity)
 {
@@ -55,7 +56,7 @@ void Particle::spawnParticles(int r, int type, int x, int y)
     {
         for (int j = 0; j < s; j++)
         {
-            float dx = math::calcDist(x + (i - r), y + (j - r), x, y);
+            float dx = m.calcDist(x + (i - r), y + (j - r), x, y);
             if (dx <= r)
             {
                 if (c % 2 == 0)
@@ -72,6 +73,7 @@ void Particle::spawnParticles(int r, int type, int x, int y)
         p->id = type;
         p->color = getColor(type);
         p->hasUpdated = true;
+        p->viscosity = getViscosity(type);
     }
 }
 
@@ -104,11 +106,22 @@ void Particle::resetParticle(Particle_s* p)
 {
     p->color = sf::Color::Black;
     p->hasUpdated = false;
-    p->id = 0;
+    p->id = Empty;
     p->lifeTime = 0;
     p->maxLifeTime = -1;
     p->velocity.x = 0;
     p->velocity.y = 0;
+    p->viscosity = 0.0f;
+}
+
+float Particle::getViscosity(int type) 
+{
+    switch (type)
+    {
+    case 0: return 0.0f;
+    case 1: return 0.0f;
+    case 2: return 7.0f;
+    }
 }
 
 sf::Color Particle::getColor(int type)
@@ -140,54 +153,89 @@ void Particle::updateSand(int x, int y)
     int cX = x;
     int cY = y;
     
-        for (int i = 0; i < curr->velocity.y; i++)
+    for (int i = 0; i < curr->velocity.y; i++)
+    {
+        if (cY + 1 < height)
         {
-            if (cY + 1 < height)
+            Particle_s* p = getParticle(cX, cY += 1);
+
+            if (p->id == Empty)
             {
-                Particle_s* p = getParticle(cX, cY += 1);
-            
-                if (p->id == Empty)
+                moveParticle(curr, cX, cY);
+                curr->velocity.y -= 1;
+            }
+            else
+            {
+                p = getParticle(cX += 1, cY);
+                if (p->id == Empty && curr->velocity.y > 0)
                 {
                     moveParticle(curr, cX, cY);
                     curr->velocity.y -= 1;
-
                 }
-                curr = &*p;
+                else
+                {
+                    p = getParticle(cX -= 2, cY);
+                    if (p->id == Empty && curr->velocity.y > 0)
+                    {
+                        moveParticle(curr, cX, cY);
+                        curr->velocity.y -= 1;
+                    }
+                }
             }
+            curr = &*p;
         }
-    
+    }
 }
 
 void Particle::updateWater(int x, int y)
 {
-    if (y + 1 < height)
-    {
-        Particle_s* curr = getParticle(x, y);
-        Particle_s* below = getParticle(x, y + 1);
-        Particle_s* belowRight = getParticle(x - 1, y + 1);
-        Particle_s* belowLeft = getParticle(x + 1, y + 1);
-        Particle_s* right = getParticle(x - 1, y);
-        Particle_s* left = getParticle(x + 1, y);
+    Particle_s* curr = getParticle(x, y);
+    curr->velocity.y = gravity * curr->viscosity;
+    int cX = x;
+    int cY = y;
 
-        if (below->id == Empty)
+    for (int i = 0; i < curr->velocity.y; i++)
+    {
+        int dir = m.randd();
+        if (cY + 1 < height)
         {
-            moveParticle(curr, x, y + 1);
-        }
-        else if (belowRight->id == Empty)
-        {
-            moveParticle(curr, x - 1, y + 1);
-        }
-        else if (belowLeft->id == Empty)
-        {
-            moveParticle(curr, x + 1, y + 1);
-        }
-        else if (right->id == Empty)
-        {
-            moveParticle(curr, x - 1, y);
-        }
-        else if (left->id == Empty)
-        {
-            moveParticle(curr, x + 1, y);
+            if (getParticle(cX, cY + 1)->id == Empty)
+            {
+                moveParticle(curr, cX, cY + 1);
+                curr = getParticle(cX, cY + 1);
+                curr->velocity.y -= 1;
+                cY += 1;
+            }
+            else if (getParticle(cX + 1, cY + 1)->id == Empty && dir == 0)
+            {
+                moveParticle(curr, cX + 1, cY + 1);
+                curr = getParticle(cX + 1, cY + 1);
+                curr->velocity.y -= 1;
+                cX += 1;
+                cY += 1;
+            }
+            else if(getParticle(cX - 1, cY + 1)->id == Empty && dir == 1)
+            {
+                moveParticle(curr, cX - 1, cY + 1);
+                curr = getParticle(cX - 1, cY + 1);
+                curr->velocity.y -= 1;
+                cY += 1;
+                cX -= 1;
+            }
+            else if (getParticle(cX + 1, cY)->id == Empty && dir == 0)
+            {
+                moveParticle(curr, cX + 1, cY);
+                curr = getParticle(cX + 1, cY);
+                curr->velocity.y -= 1;
+                cX += 1;
+            }
+            else if(getParticle(cX - 1, cY)->id == Empty && dir == 1)
+            {
+                moveParticle(curr, cX - 1, cY);
+                curr = getParticle(cX - 1, cY);
+                curr->velocity.y -= 1;
+                cX -= 1;
+            }
         }
     }
 }

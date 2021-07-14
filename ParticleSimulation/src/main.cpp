@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
-#include <math.h>
 #include "Particle.h"
 
 void loadFont(std::string path, sf::Font* font);

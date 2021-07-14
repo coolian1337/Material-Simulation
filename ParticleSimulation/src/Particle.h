@@ -10,6 +10,7 @@ struct Particle_s
     float lifeTime;
     sf::Vector2i velocity;
     sf::Color color;
+    float viscosity;
 };
 
 class Particle
@@ -25,6 +26,7 @@ public:
 
     //private normal functions
 private:
+    math m();
     int width, height;
     float gravity;
     Particle_s* particles;
@@ -33,6 +35,7 @@ private:
     Particle_s* getParticle(int x, int y);
     void setParticle(int x, int y, Particle_s particle);
     void moveParticle(Particle_s* curr, int x, int y);
+    float getViscosity(int type);
 
     /*
     * update functions for each type
