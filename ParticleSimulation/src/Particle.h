@@ -20,9 +20,10 @@ public:
     enum Type {Empty, Sand, Water};
     Particle(int width, int height, float gravity);
     ~Particle();
-	sf::Uint8* convertToPixels();
+	sf::Uint8* convertToPixels(sf::Uint8* pixels);
     void spawnParticles(int r, int type, int x, int y);
     void update();
+    void clearParticles();
 
     //private normal functions
 private:
@@ -34,8 +35,9 @@ private:
     sf::Color getColor(int type);
     Particle_s* getParticle(int x, int y);
     void setParticle(int x, int y, Particle_s particle);
-    void moveParticle(Particle_s* curr, int x, int y);
+    Particle_s* moveParticle(Particle_s* curr, int x, int y);
     float getViscosity(int type);
+
 
     /*
     * update functions for each type

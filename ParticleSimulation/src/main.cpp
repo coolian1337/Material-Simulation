@@ -9,7 +9,7 @@ int main()
 {
     const int width = 800, height = 600;
     sf::RenderWindow window(sf::VideoMode(width, height), "Particle simulation");
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(6000000);
     std::map<int, bool> keys;
 
     float fps;
@@ -27,6 +27,8 @@ int main()
     sf::Texture t;
     t.create(window.getSize().x, window.getSize().y);
     sf::Sprite spr(t);
+
+    sf::Uint8* pixels = new sf::Uint8[width * height * 4];
 
     while (window.isOpen())
     {
@@ -55,6 +57,9 @@ int main()
                 place = Particle::Sand;
         }
 
+        if (keys[sf::Keyboard::Enter])
+            particleSystem.clearParticles();
+
         sf::Text te;
         te.setPosition(750, 10);
         te.setFont(font);
@@ -77,9 +82,9 @@ int main()
         * then draw
         */
         
-        sf::Uint8* pixels = particleSystem.convertToPixels();
+        particleSystem.convertToPixels(pixels);
         t.update(pixels);
-        delete[] pixels;
+        
         spr.setTexture(t);
 
         window.clear();
@@ -94,7 +99,7 @@ int main()
         window.setTitle(f);
         previousTime = currentTime;
     }
-
+    delete[] pixels;
     return 0;
 }
 

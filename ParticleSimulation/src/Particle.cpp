@@ -6,7 +6,24 @@ Particle::Particle(int width, int height, float gravity)
     this->height = height;
     this->width = width;
     this->gravity = gravity;
-    particles = new Particle_s[width * height];
+    particles = new Particle_s[static_cast<unsigned long>((static_cast<unsigned long>(width) * static_cast<unsigned long>(height)))];
+    for (int x = 0; x < width; x++)
+    {
+        for (int y = 0; y < height; y++)
+        {
+            Particle_s* p = getParticle(x, y);
+            p->id = Empty;
+            p->color = sf::Color::Black;
+            p->hasUpdated = false;
+            p->lifeTime = 0.f;
+            p->velocity = sf::Vector2i(0, 0);
+            p->maxLifeTime = -1.f;
+        }
+    }
+}
+
+void Particle::clearParticles()
+{
     for (int x = 0; x < width; x++)
     {
         for (int y = 0; y < height; y++)
@@ -27,9 +44,8 @@ Particle::~Particle()
     delete[] particles;
 }
 
-sf::Uint8* Particle::convertToPixels()
+sf::Uint8* Particle::convertToPixels(sf::Uint8* pixels)
 {
-    sf::Uint8* pixels = new sf::Uint8[width * height * 4];
     for (int i = width - 1; i > 0; i--)
     {
         for (int j = height - 1; j > 0; j--)
@@ -56,7 +72,7 @@ void Particle::spawnParticles(int r, int type, int x, int y)
     {
         for (int j = 0; j < s; j++)
         {
-            float dx = m.calcDist(x + (i - r), y + (j - r), x, y);
+            float dx = math::calcDist(x + (i - r), y + (j - r), x, y);
             if (dx <= r)
             {
                 if (c % 2 == 0)
@@ -139,11 +155,12 @@ Particle_s* Particle::getParticle(int x, int y)
     return &particles[y * width + x];
 }
 
-void Particle::moveParticle(Particle_s* curr,int x, int y)
+Particle_s* Particle::moveParticle(Particle_s* curr,int x, int y)
 {
     Particle_s* loc = getParticle(x, y);
     memcpy(loc, curr, sizeof(Particle_s));
     resetParticle(curr);
+    return loc;
 }
 
 void Particle::updateSand(int x, int y)
@@ -196,7 +213,7 @@ void Particle::updateWater(int x, int y)
 
     for (int i = 0; i < curr->velocity.y; i++)
     {
-        int dir = m.randd();
+        int dir = math::randd();
         if (cY + 1 < height)
         {
             if (getParticle(cX, cY + 1)->id == Empty)

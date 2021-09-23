@@ -1,13 +1,21 @@
 ﻿  Particle.cpp
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(59,26): error C2228: left of '.calcDist' must have class/struct/union
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(152,24): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(75,68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(75,65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(75,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(75,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(169,24): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(193,32): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+C:\Users\Julian\source\repos\ParticleSimulation\ParticleSimulation\src\Particle.cpp(210,32): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int
           ]
-  main.cpp
+  Generating code
+  2 of 307 functions ( 0.7%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  ParticleSimulation.vcxproj -> C:\Users\Julian\source\repos\ParticleSimulation\x64\Release\ParticleSimulation.exe
